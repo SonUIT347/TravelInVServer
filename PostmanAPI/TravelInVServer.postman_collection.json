@@ -1,0 +1,1282 @@
+{
+	"info": {
+		"_postman_id": "03f1fd4f-8690-4440-a8c8-12294f0cd9f0",
+		"name": "TravelInVServer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31409547"
+	},
+	"item": [
+		{
+			"name": "postApi",
+			"item": [
+				{
+					"name": "createPost",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "postRequest",
+									"value": "{\n    \"title\":\"{{$randomNameSuffix}}\",\n    \"demo_description\": \"Tỉnh lỵ của tỉnh Bình Dương là thành phố Thủ Dầu Một, cách trung tâm Thành phố Hồ Chí Minh 30 km theo đường Quốc lộ 13. Đây là tỉnh có dân số đông thứ 6 trong tổng số 63 tỉnh thành và có tỷ lệ gia tăng dân số cơ học rất cao do có nhiều người nhập cư sinh sống, hơn 50% dân số ở Bình Dương là dân nhập cư. Bình Dương cũng là tỉnh đầu tiên và duy nhất ở Việt Nam hiện nay có 5 thành phố.\",\n    \"id_province\": 1,\n    \"description\":\"Năm 2020 là đơn vị hành chính đông thứ sáu về dân số và là tỉnh có dân số đông thứ tư cả nước, xếp thứ ba về Tổng sản phẩm trên địa bàn (GRDP), xếp thứ ba về GRDP bình quân đầu người, đứng thứ 8 về tốc độ tăng trưởng GRDP. Với 2.465.000 người dân[5], GRDP đạt 389.500 tỉ Đồng (tương ứng với 16,81 tỉ USD), GRDP bình quân đầu người năm 2023 đạt 172 triệu đồng (tương ứng với 7012 USD, cao nhất Việt Nam), tốc độ tăng trưởng GRDP dự kiến đạt 9,5%[6].\",\n    \"des_title\":\"{{$randomCity}}\"\n}",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "postImage",
+									"contentType": "",
+									"type": "file",
+									"src": "/C:/Users/Admin/OneDrive/Pictures/Screenshots/Screenshot 2023-12-01 174812.png"
+								},
+								{
+									"key": "DesImage1",
+									"type": "file",
+									"src": "/C:/Users/Admin/OneDrive/Pictures/Screenshots/Screenshot 2023-11-29 013456 - Copy.png"
+								},
+								{
+									"key": "DesImage2",
+									"type": "file",
+									"src": "/C:/Users/Admin/OneDrive/Pictures/Screenshots/Screenshot 2023-12-02 011531.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/post/createPost",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"post",
+								"createPost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "imagePost",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file ",
+									"type": "file",
+									"src": "/C:/Users/Admin/OneDrive/Pictures/Saved Pictures/z4231575756934_39b2f3d6849d3575655a0f176e8ea5c6.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/azure/upload",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"azure",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllPost",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/post/public/getAllPost",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"post",
+								"public",
+								"getAllPost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFeaturedPost",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/post/public/getFeaturedPost",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"post",
+								"public",
+								"getFeaturedPost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRecentPost",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/post/public/getRecentPost",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"post",
+								"public",
+								"getRecentPost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRelatedPost",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/post/public/getRelatedPost/:idProvince/:idPost",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"post",
+								"public",
+								"getRelatedPost",
+								":idProvince",
+								":idPost"
+							],
+							"variable": [
+								{
+									"key": "idProvince",
+									"value": "2"
+								},
+								{
+									"key": "idPost",
+									"value": "152"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getGoToProvince",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/post/public/getGoToProvince",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"post",
+								"public",
+								"getGoToProvince"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePostStatus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/post/updatePostStatus/:id_post",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"post",
+								"updatePostStatus",
+								":id_post"
+							],
+							"variable": [
+								{
+									"key": "id_post",
+									"value": "702"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get author post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/post/author/:id_post",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"post",
+								"author",
+								":id_post"
+							],
+							"variable": [
+								{
+									"key": "id_post",
+									"value": "703"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post sort by status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/post/sortbystatus",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"post",
+								"sortbystatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/post/public/:id_post",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"post",
+								"public",
+								":id_post"
+							],
+							"variable": [
+								{
+									"key": "id_post",
+									"value": "702"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/post/public/getPostUserPending/:username",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"post",
+								"public",
+								"getPostUserPending",
+								":username"
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": "son1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post like",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "delete post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/post/delete/:id_post",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"post",
+								"delete",
+								":id_post"
+							],
+							"variable": [
+								{
+									"key": "id_post",
+									"value": "702"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ProvinceAPI",
+			"item": [
+				{
+					"name": "getAllProvince",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/public/province",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"public",
+								"province"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPeovinceById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/public/province/:id_province",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"public",
+								"province",
+								":id_province"
+							],
+							"variable": [
+								{
+									"key": "id_province",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post by province id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/public/province/post/:id_province",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"public",
+								"province",
+								"post",
+								":id_province"
+							],
+							"variable": [
+								{
+									"key": "id_province",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDestination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/public/province/destination/:id_province",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"public",
+								"province",
+								"destination",
+								":id_province"
+							],
+							"variable": [
+								{
+									"key": "id_province",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LikeAPI",
+			"item": [
+				{
+					"name": "createLike",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_post\":704,\r\n    \"id_user\":502\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/like/create",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"like",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteLike",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_user\":502,\r\n    \"id_post\":704\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/like/delete",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"like",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "isLikeExists",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_user\":352,\r\n    \"id_post\":403\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/like/isLikeExists",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"like",
+								"isLikeExists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete all like by post id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/like/delete/:id_post",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"like",
+								"delete",
+								":id_post"
+							],
+							"variable": [
+								{
+									"key": "id_post",
+									"value": "703"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DescriptionAPI",
+			"item": [
+				{
+					"name": "getDescriptionByPostID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/description/:id_post",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"description",
+								":id_post"
+							],
+							"variable": [
+								{
+									"key": "id_post",
+									"value": "502"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CommentAPI",
+			"item": [
+				{
+					"name": "Create Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\":\"Bình Dương là vùng đất chiến trường năm xưa với những địa danh đã đi vào lịch sử như Phú Lợi, Bàu Bàng, Bến Súc, Lai Khê, Nhà Đỏ và đặc biệt là chiến khu Đ với trung tâm là huyện Tân Uyên (nay là huyện Bắc Tân Uyên và thành phố Tân Uyên), vùng Tam giác sắt trong đó có ba làng An. Ngoài ra còn có khu du lịch Đại Nam là khu du lịch lớn nhất Đông Nam Á.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/comment/create/:id_post",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comment",
+								"create",
+								":id_post"
+							],
+							"variable": [
+								{
+									"key": "id_post",
+									"value": "702"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comment by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/comment/:id_comment",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comment",
+								":id_comment"
+							],
+							"variable": [
+								{
+									"key": "id_comment",
+									"value": "252"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get comment by post id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/comment/post/:id_post",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comment",
+								"post",
+								":id_post"
+							],
+							"variable": [
+								{
+									"key": "id_post",
+									"value": "502"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/comment/delete/:id_comment",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comment",
+								"delete",
+								":id_comment"
+							],
+							"variable": [
+								{
+									"key": "id_comment",
+									"value": "408"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\":\"Bình Dương là vùng đất chiến trường năm xưa với những địa danh đã đi vào lịch sử như Phú Lợi, Bàu Bàng, Bến Súc, Lai Khê, Nhà Đỏ và đặc biệt là chiến khu Đ với trung tâm là huyện Tân Uyên (nay là huyện Bắc Tân Uyên và thành phố Tân Uyên), vùng Tam giác sắt trong đó có ba làng An. Ngoài ra còn có khu du lịch Đại Nam là khu du lịch lớn nhất Đông Nam Á.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/comment/update/:id_comment",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comment",
+								"update",
+								":id_comment"
+							],
+							"variable": [
+								{
+									"key": "id_comment",
+									"value": "354"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SubCommentAPI",
+			"item": [
+				{
+					"name": "create subcomment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"son1\",\r\n    \"description\":\"dday la tan binh hem 68 bui thi xuan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/subcomment/create/:id_comment",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"subcomment",
+								"create",
+								":id_comment"
+							],
+							"variable": [
+								{
+									"key": "id_comment",
+									"value": "352"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update sub comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"son12\",\r\n    \"description\":\"nul nulasdasd nul nul\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/subcomment/update/:id_sub_comment",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"subcomment",
+								"update",
+								":id_sub_comment"
+							],
+							"variable": [
+								{
+									"key": "id_sub_comment",
+									"value": "102"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete sub comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"son12\",\r\n    \"description\":\"nul nulasdasd nul nul\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/subcomment/delete/:id_sub_comment",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"subcomment",
+								"delete",
+								":id_sub_comment"
+							],
+							"variable": [
+								{
+									"key": "id_sub_comment",
+									"value": "102"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserAPI",
+			"item": [
+				{
+					"name": "get user info",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/user/info",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"user",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userRequest",
+									"value": "{\n    \"username\": \"user\",\n    \"password\":\"user\",\n    \"gmail\": \"nhalinh347123\",\n    \"role\": \"ROLE_USER\",\n    \"name\":\"user\"\n}",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/Admin/OneDrive/Pictures/Screenshots/Screenshot 2023-11-22 123416.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/addNewUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"addNewUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userRequest",
+									"value": "{\n    \"username\": \"son1\",\n    \"gmail\": \"nhalinh34755123\",\n    \"role\": \"ROLE_USER\",\n    \"name\":\"abc\",\n    \"phone_number\":\"0365826656\",\n\"gender\":\"male\"\n\n}",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/Admin/OneDrive/Pictures/Screenshots/Screenshot 2023-11-29 013456 - Copy.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/user/update",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const {status, jwttoken} = JSON.parse(responseBody);\r",
+									"if(status == 200){\r",
+									"    pm.environment.set(\"token\", jwttoken);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "//user account\r\n// {\r\n//     \"username\": \"son123\",\r\n//     \"password\":\"123\"\r\n// }\r\n\r\n//admin account\r\n{\r\n    \"username\": \"son1\",\r\n    \"password\":\"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaGFsaW5oIiwiaWF0IjoxNzExNjU0MTc1LCJleHAiOjE3MTE2NTU5NzV9.PBLF87Th7YiNv092okX6mY6JfDD2W3WDUEb_9H4qKt0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/auth/user/userProfile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"user",
+						"userProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
