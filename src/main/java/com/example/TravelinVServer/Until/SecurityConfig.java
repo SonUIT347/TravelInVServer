@@ -23,6 +23,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.example.TravelinVServer.Jwt.JwtAuthenticationFilter;
 import com.example.TravelinVServer.Service.UserService;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 /**
  *
@@ -49,7 +52,7 @@ public class SecurityConfig {
     // Configuring HttpSecurity 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
+        return http.csrf().disable().cors().and()
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/welcome", "/auth/login", "/post/public/**", "/public/**", "/azure/**", "like/**", "/description/**", "/comment/**", "comment/post/**", "/post/author/**").permitAll()
                 .and()
@@ -87,5 +90,14 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
 }
