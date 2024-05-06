@@ -35,6 +35,7 @@ import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,6 +43,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -76,7 +78,7 @@ public class PostController {
     CommentService commentSercive;
 
     @GetMapping(value = "/sortbystatus")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_COLLABORATOR', 'ROLE_ADMIN')")
     public ResponseEntity<List<PostResponse>> getSortPost() {
 
         try {
@@ -103,7 +105,7 @@ public class PostController {
     }
 
     @PutMapping(value = "/updatePostStatus/{id_post}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_COLLABORATOR', 'ROLE_ADMIN')")
     public ResponseEntity<String> updatePostStatus(@PathVariable("id_post") Integer id_post) {
 
         try {
@@ -121,6 +123,22 @@ public class PostController {
     public ResponseEntity<List<PostResponse>> getAllPost() {
         try {
             List<PostResponse> postList = postService.handleGetAllPost();
+            if (postList != null && !postList.isEmpty()) {
+                return ResponseEntity.ok(postList);
+            } else {
+                return ResponseEntity.noContent().build();
+            }
+        } catch (Exception e) {
+            // Log the exception for further investigation
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping(value = "/public/getPostAndProvince")
+    public ResponseEntity<List<PostResponse>> getPostAndProvince() {
+        try {
+            List<PostResponse> postList = postService.handleGetPostAndProvince();
             if (postList != null && !postList.isEmpty()) {
                 return ResponseEntity.ok(postList);
             } else {
@@ -208,7 +226,7 @@ public class PostController {
         }
     }
 
-    @GetMapping(value = "/public/getPostLike/{username}")
+    @GetMapping(value = "/public/getPostUserPostLike/{username}")
     public ResponseEntity<List<PostUserProvinceResponse>> getPostLike(@PathVariable("username") String username) {
         try {
             List<PostUserProvinceResponse> res = postService.handleGetPostLike(username);
@@ -250,13 +268,13 @@ public class PostController {
         }
     }
 
-    @PostMapping(value = "/createPost")
+    @PostMapping(value = "/createPost", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     public ResponseEntity<String> createPost(
-            @RequestPart PostRequest postRequest,
-            @RequestParam("postImage") MultipartFile postImage,
-            @RequestParam("DesImage1") MultipartFile DesImage1,
-            @RequestParam("DesImage2") MultipartFile DesImage2,
+            @RequestPart(value = "postRequest") PostRequest postRequest,
+            @RequestPart(value = "postImage", required = false) MultipartFile postImage,
+            //            @RequestPart(value = "DesImage1", required = false) MultipartFile DesImage1,
+            //            @RequestPart(value = "DesImage2", required = false) MultipartFile DesImage2,
             HttpServletRequest request) throws ServletException, IOException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
@@ -295,12 +313,12 @@ public class PostController {
                 if (postImage != null) {
                     post.setImage(azureBlobStorageService.uploadImage(postImage));
                 }
-                if (DesImage1 != null) {
-                    des_image1 = azureBlobStorageService.uploadImage(DesImage1);
-                }
-                if (DesImage2 != null) {
-                    des_image2 = azureBlobStorageService.uploadImage(DesImage2);
-                }
+//                if (DesImage1 != null) {
+//                    des_image1 = azureBlobStorageService.uploadImage(DesImage1);
+//                }
+//                if (DesImage2 != null) {
+//                    des_image2 = azureBlobStorageService.uploadImage(DesImage2);
+//                }
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -312,8 +330,8 @@ public class PostController {
             post.setProvince(province);
             post.setDate_time(date);
             postService.createPost(post);
-            descriptionService.createDes(postRequest, post, des_image1, des_image2);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Post created successfully");
+//            descriptionService.createDes(postRequest, post, des_image1, des_image2);
+            return ResponseEntity.status(HttpStatus.CREATED).body(post.getId_post().toString());
         } catch (Exception e) {
             // Log the error
             e.printStackTrace();

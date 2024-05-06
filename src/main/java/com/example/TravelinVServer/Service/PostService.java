@@ -96,6 +96,7 @@ public class PostService {
                         res.setStatus(postRes.getStatus());
                         res.setPost_name(postRes.getPost_name());
                         res.setId_user(postRes.getUser().getId_user());
+                        res.setId_province(postRes.getProvince().getId_province());
                         return res;
                     })
                     .collect(Collectors.toList());
@@ -110,8 +111,8 @@ public class PostService {
         List<FeaturedPostResponse> featuredPosts = null;
         try {
             featuredPosts = postReository.getFeaturedPost();
-            if (featuredPosts.size() > helper.getSQL_ROWS_LIMIT_2()) {
-                featuredPosts = featuredPosts.subList(0, helper.getSQL_ROWS_LIMIT_2());
+            if (featuredPosts.size() > helper.getSQL_ROWS_LIMIT_3()) {
+                featuredPosts = featuredPosts.subList(0, helper.getSQL_ROWS_LIMIT_3());
             }
             return featuredPosts;
         } catch (Exception e) {
@@ -263,9 +264,34 @@ public class PostService {
             return null;
         }
     }
-    public boolean handleDeletPostById(Integer id_post){
+
+    public List<PostResponse> handleGetPostAndProvince() {
+        List<Object[]> postList = null;
         try {
-            if(id_post != null && postReository.existsById(id_post)){
+            postList = postReository.getPostAndProvince();
+            List<PostResponse> postRess = postList
+                    .stream()
+                    .map(postRes -> {
+                        PostResponse res = new PostResponse();
+                        res.setId_post((Integer) postRes[0]);
+                        res.setDate_time((Date) postRes[1]);
+                        res.setPost_name((String) postRes[2]);
+                        res.setImage((String) postRes[3]);
+                        res.setProvince_name((String) postRes[4]);
+                        res.setId_province((Integer) postRes[5]);
+                        return res;
+                    })
+                    .collect(Collectors.toList());
+            return postRess;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean handleDeletPostById(Integer id_post) {
+        try {
+            if (id_post != null && postReository.existsById(id_post)) {
                 postReository.deleteById(id_post);
                 return true;
             }

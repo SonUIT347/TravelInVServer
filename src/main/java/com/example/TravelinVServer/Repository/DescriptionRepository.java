@@ -6,6 +6,7 @@ package com.example.TravelinVServer.Repository;
 
 import com.example.TravelinVServer.Modal.Description;
 import com.example.TravelinVServer.Responese.DescriptionResponse;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -25,7 +26,7 @@ public interface DescriptionRepository extends JpaRepository<Description, Intege
     @Query("SELECT new com.example.TravelinVServer.Responese.DescriptionResponse(d.id, d.description, d.image1, d.image2, d.title, d.post.id_post) "
             + "FROM descriptions d "
             + "WHERE d.post.id_post = :id_post")
-    DescriptionResponse getDescription(@Param("id_post") Integer id_post);
+    List<DescriptionResponse> getDescription(@Param("id_post") Integer id_post);
     
     @Transactional
     @Modifying

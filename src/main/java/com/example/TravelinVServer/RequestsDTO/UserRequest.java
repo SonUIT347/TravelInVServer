@@ -31,6 +31,12 @@ public class UserRequest {
         this.phone_number = phone_number;
     }
 
+    public UserRequest(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
     public void setPhone_number(String phone_nummber) {
         this.phone_number = phone_nummber;
     }

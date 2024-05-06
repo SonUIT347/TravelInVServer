@@ -25,14 +25,19 @@ public class Helper {
     private static final Integer SQL_ROWS_LIMIT_3 = 3;
 
     private static final Integer SQL_ROWS_LIMIT_9 = 9;
-    
+
     private static final Integer SQL_ROWS_LIMIT_5 = 5;
+    private static final Integer SQL_ROWS_LIMIT_1 = 1;
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
     @Autowired
     private UserService userService;
 
     public Helper() {
+    }
+
+    public static Integer getSQL_ROWS_LIMIT_1() {
+        return SQL_ROWS_LIMIT_1;
     }
 
     public static Integer getSQL_ROWS_LIMIT_5() {

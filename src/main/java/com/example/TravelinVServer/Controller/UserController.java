@@ -11,11 +11,14 @@ package com.example.TravelinVServer.Controller;
 import com.example.TravelinVServer.Jwt.JwtTokenProvider;
 import com.example.TravelinVServer.Modal.User;
 import com.example.TravelinVServer.RequestsDTO.UserRequest;
+import com.example.TravelinVServer.Responese.UserResponse;
+import com.example.TravelinVServer.Responese.updateRole;
 import com.example.TravelinVServer.Service.AzureBlobStorageService;
 import com.example.TravelinVServer.Service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,19 +40,19 @@ public class UserController {
 
     @PostMapping("/addNewUser")
     public ResponseEntity<String> addNewUser(
-            @RequestPart UserRequest userRequest,
-            @RequestParam("avatar") MultipartFile avatar
-    ) throws ServletException, IOException {
+            @RequestBody UserRequest userRequest
+    //            @RequestParam("avatar") MultipartFile avatar
+    ) {
         if (userService.isUserExists(userRequest.getUsername())) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body("User with username " + userRequest.getUsername() + " already exists.");
         }
-        try {
-            userRequest.setAvatar(azureBlobStorageService.uploadImage(avatar));
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
+//        try {
+//            userRequest.setAvatar(azureBlobStorageService.uploadImage(avatar));
+//
+//        } catch (Exception exception) {
+//            exception.printStackTrace();
+//        }
         userRequest.setRole("ROLE_USER");
         String result = userService.addUser(userRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
@@ -87,7 +90,7 @@ public class UserController {
     }
 
     @GetMapping("/info")
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN', 'ROLE_COLLABORATOR')")
     public ResponseEntity<?> getUserInfo(HttpServletRequest request) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
         String token = null;
@@ -101,10 +104,35 @@ public class UserController {
             }
         }
         if (userService.isUserExists(username)) {
-            User userInfo = userService.getUserInfo(username);
+            UserResponse userInfo = userService.getUserData(username);
             return ResponseEntity.ok(userInfo);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with username: " + username);
+        }
+    }
+
+    @GetMapping("/getAllUser")
+    public ResponseEntity<List<UserResponse>> getAllUser() {
+        try {
+            List<UserResponse> res = userService.handleGetAllUser();
+            return ResponseEntity.ok(res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @PutMapping("/Role")
+//    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN'")
+    public ResponseEntity<String> updateUserRole(@RequestBody updateRole payload) {
+        try {
+            if (userService.handleUpdateRoleUser(payload.getUsername(), payload.getAccountType())) {
+                return ResponseEntity.ok("Update successfully");
+            }
+            return ResponseEntity.badRequest().body("update failed");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
         }
     }
 

@@ -9,8 +9,10 @@ import com.example.TravelinVServer.Modal.Post;
 //import com.example.TravelinVServer.Modal.User;
 import com.example.TravelinVServer.Repository.DescriptionRepository;
 import com.example.TravelinVServer.Repository.PostRepository;
+import com.example.TravelinVServer.RequestsDTO.DescriptionPayload;
 import com.example.TravelinVServer.RequestsDTO.PostRequest;
 import com.example.TravelinVServer.Responese.DescriptionResponse;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,17 +28,17 @@ public class DescriptionService {
     @Autowired
     private PostRepository postRepository;
 
-    public Description createDes(PostRequest postRequest, Post post, String image1, String image2) {
+    public Description createDes(DescriptionPayload payload, Post post, String image1, String image2) {
         Description description = new Description();
-        description.setDescription(postRequest.getDescription());
+        description.setDescription(payload.getDescription());
         description.setImage1(image1);
         description.setImage2(image2);
-        description.setTitle(postRequest.getDes_title());
+        description.setTitle(payload.getDes_title());
         description.setPost(post);
         return descriptionRepository.save(description);
     }
 
-    public DescriptionResponse handleGetDescriptionInfoFromPostId(Integer id_post) {
+    public List<DescriptionResponse> handleGetDescriptionInfoFromPostId(Integer id_post) {
         if (id_post != null) {
 //            System.out.println(descriptionRepository.existsById(id_post));
 //            if (descriptionRepository.existsById(id_post)) {

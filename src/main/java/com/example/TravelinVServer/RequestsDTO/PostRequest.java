@@ -29,6 +29,17 @@ public class PostRequest {
         this.des_title = des_title;
     }
 
+    public PostRequest(String title, String demo_description, Integer id_province) {
+        this.title = title;
+        this.demo_description = demo_description;
+        this.id_province = id_province;
+    }
+
+    public PostRequest(String title, String demo_description) {
+        this.title = title;
+        this.demo_description = demo_description;
+    }
+    
     public PostRequest() {
     }
 

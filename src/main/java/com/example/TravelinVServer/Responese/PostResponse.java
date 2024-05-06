@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class PostResponse {
+
     private Integer id_post;
     private Date date_time;
     private String post_name;
@@ -24,8 +25,19 @@ public class PostResponse {
     private Integer id_user;
     private Integer id_province;
     private Province province;
+    private String province_name;
+    private String username;
 
     public PostResponse() {
+    }
+
+    public PostResponse(Integer id_post, Date date_time, String post_name, String image, String province_name, Integer id_province) {
+        this.id_post = id_post;
+        this.date_time = date_time;
+        this.post_name = post_name;
+        this.image = image;
+        this.province_name = province_name;
+        this.id_province = id_province;
     }
 
     public PostResponse(Integer id_post, Date date_time, String post_name, String image, String status, Integer id_user, Integer id_province) {
@@ -50,6 +62,18 @@ public class PostResponse {
         this.id_province = id_province;
     }
 
+    public PostResponse(Integer id_post, Date date_time, String post_name, String image, String demo_description, String status, Integer id_user, Integer id_province, String username) {
+        this.id_post = id_post;
+        this.date_time = date_time;
+        this.post_name = post_name;
+        this.image = image;
+        this.demo_description = demo_description;
+        this.status = status;
+        this.id_user = id_user;
+        this.id_province = id_province;
+        this.username = username;
+    }
+
     public PostResponse(Integer id_post, Date date_time, String post_name, String image, String demo_description, String status, Integer id_user, Province province) {
         this.id_post = id_post;
         this.date_time = date_time;
@@ -60,14 +84,39 @@ public class PostResponse {
         this.id_user = id_user;
         this.province = province;
     }
-    
-    
-    
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
     public void setId_province(Integer id_province) {
         this.id_province = id_province;
     }
 
-    
+    public Integer getId_province() {
+        return id_province;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public String getProvince_name() {
+        return province_name;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+
+    public void setProvince_name(String province_name) {
+        this.province_name = province_name;
+    }
+
     public Integer getId_post() {
         return id_post;
     }
@@ -124,7 +173,4 @@ public class PostResponse {
         this.id_user = id_user;
     }
 
-    
-    
-    
 }

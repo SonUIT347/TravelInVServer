@@ -54,11 +54,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable().cors().and()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/welcome", "/auth/login", "/post/public/**", "/public/**", "/azure/**", "like/**", "/description/**", "/comment/**", "comment/post/**", "/post/author/**").permitAll()
+                .requestMatchers("/auth/welcome", "/auth/login", "/post/public/**", "/public/**", "/azure/**", "like/**", "/description/public/**", "/comment/**", "comment/post/**", "/post/author/**").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/user/addNewUser").permitAll()
+
+                .authorizeHttpRequests().requestMatchers("/user/addNewUser","/user/getAllUser","/user/Role").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/user/info/**", "/comment/create/**", "/comment/delete/**", "/comment/update/**", "/post/sortbystatus", "/user/update", "/like/delete/**").authenticated()
+                .authorizeHttpRequests().requestMatchers("/description/createDes","/user/info/**", "/comment/create/**", "/comment/delete/**", "/comment/update/**", "/post/sortbystatus", "/user/update", "/like/delete/**").authenticated()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/admin/**", "/subcomment/create/**", "/subcomment/update/**", "/subcomment/delete/**").authenticated()
                 .and()
