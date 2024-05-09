@@ -21,5 +21,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t sonuit347/travelinv:v.0.1
-          docker push sonuit347/travelinv:v.0.1
+          docker build -t sonuit347/travelinv:latest
+          docker push sonuit347/travelinv:latest
