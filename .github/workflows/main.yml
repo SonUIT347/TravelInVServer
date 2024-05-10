@@ -15,7 +15,7 @@ jobs:
       - name: setup jdk 17
         uses: actions/setup-java@v2
         with:
-          distribution: 'corretto'
+          distribution: 'adopt'
           java-version: 17
       - name: build the app
         run: |
