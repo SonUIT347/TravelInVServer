@@ -37,7 +37,7 @@ jobs:
         with:
           context: .
           dockerfile: Dockerfile
-          push: true
+          push: false
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/travelinvserver:v1.0.0
           
       - name: push the docker image to docker hub
