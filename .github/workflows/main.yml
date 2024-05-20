@@ -47,3 +47,15 @@ jobs:
           dockerfile: Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/travelinvserver:v1.0.0
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v1
+        with:
+          version: 'latest'
+          
+      - name: Configure kubectl
+          run: az aks get-credentials --resource-group TravelInVServer --name travelinv --overwrite-existing
+
+      - name: Update Kubernetes deployment
+          run: kubectl rollout restart deployment/java-server
+
