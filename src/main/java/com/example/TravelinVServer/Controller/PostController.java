@@ -119,7 +119,7 @@ public class PostController {
         }
     }
 
-    @GetMapping(value = "/public/getAllPost/v2")
+    @GetMapping(value = "/public/getAllPost/v3")
     public ResponseEntity<List<PostResponse>> getAllPost() {
         try {
             List<PostResponse> postList = postService.handleGetAllPost();
