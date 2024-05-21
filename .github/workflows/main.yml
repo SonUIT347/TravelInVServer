@@ -4,7 +4,10 @@ on:
   push:
     branches:
       - main  # Change this to the branch you want to trigger the workflow on
-
+permissions:
+  id-token: write
+  contents: read
+  
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -32,6 +35,7 @@ jobs:
       #   uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
       #   with:
       #     images: sonuit347/travelinv
+      
       - name: build the docker image
         uses: docker/build-push-action@v4
         with:
@@ -53,9 +57,16 @@ jobs:
         with:
           version: 'latest'
           
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} 
+          enable-AzPSSession: true
+          
       - name: Configure kubectl
-          run: az aks get-credentials --resource-group TravelInVServer --name travelinv --overwrite-existing
+        run: az aks get-credentials --resource-group TravelInVServer --name travelinv --overwrite-existing
 
       - name: Update Kubernetes deployment
-          run: kubectl rollout restart deployment/java-server
-
+        run: kubectl rollout restart deployment/java-server
