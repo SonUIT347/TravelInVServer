@@ -44,7 +44,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     @Query("SELECT new com.example.TravelinVServer.Responese.RecentPostResponse(p.id_post,  p.date_time, p.post_name, p.image, p.province)"
             + "FROM posts p "
-            + "WHERE p.status = 'Pending' "
+            + "WHERE p.status = 'Approved' "
             + "ORDER by p.date_time DESC")
     List<RecentPostResponse> getRecentPost();
 
@@ -52,7 +52,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
             + "FROM posts p "
             + "WHERE id_post!=:postId "
             + "AND province=:provinceId "
-            + "AND p.status='Pending' "
+            + "AND p.status='Approved' "
             + "ORDER by p.date_time DESC")
     List<RelatedPostResponse> getRelatedPost(@Param("postId") Integer postId, @Param("provinceId") Province provinceId);
 
@@ -71,7 +71,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Query("SELECT new com.example.TravelinVServer.Responese.GoToResponse (p.province_name) "
             + "FROM provinces p, posts p2 "
             + "WHERE p2.province.id_province = p.id_province "
-            + "AND p2.status = 'Pending' "
+            + "AND p2.status = 'Approved' "
             + "GROUP BY p.id_province")
     List<GoToResponse> getGoto();
 
