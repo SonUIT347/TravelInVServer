@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://travelinv.postgres.database.azure.com:5432/travelinv
+    url: jdbc:postgresql://travelinvasia.postgres.database.azure.com:5432/travelinv
     username: admin_azure
     password: Baitaplonso7
     driver-class-name: org.postgresql.Driver
