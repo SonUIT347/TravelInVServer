@@ -269,7 +269,7 @@ public class PostController {
     }
 
     @PostMapping(value = "/createPost", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN', 'ROLE_COLLABORATOR')")
     public ResponseEntity<String> createPost(
             @RequestPart(value = "postRequest") PostRequest postRequest,
             @RequestPart(value = "postImage", required = false) MultipartFile postImage,
