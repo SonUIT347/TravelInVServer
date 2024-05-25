@@ -72,8 +72,19 @@ public class PostResponse {
         this.id_user = id_user;
         this.id_province = id_province;
         this.username = username;
-    }
-
+    }   
+    public PostResponse(Integer id_post, Date date_time, String post_name, String image, String demo_description, String status, Integer id_user, Integer id_province, String username, String provine_name) {
+        this.id_post = id_post;
+        this.date_time = date_time;
+        this.post_name = post_name;
+        this.image = image;
+        this.demo_description = demo_description;
+        this.status = status;
+        this.id_user = id_user;
+        this.id_province = id_province;
+        this.username = username;
+        this.province_name = provine_name;
+    } 
     public PostResponse(Integer id_post, Date date_time, String post_name, String image, String demo_description, String status, Integer id_user, Province province) {
         this.id_post = id_post;
         this.date_time = date_time;

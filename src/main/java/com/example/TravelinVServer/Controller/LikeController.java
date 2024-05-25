@@ -32,7 +32,7 @@ public class LikeController {
 //    pri
 
     @PostMapping("/create")
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN', 'ROLE_COLLABORATOR')")
     public ResponseEntity<String> createLike(@RequestBody LikePayload payload) {
         try {
             if (payload.getId_post() != null && payload.getId_user() != null) {
@@ -47,7 +47,8 @@ public class LikeController {
         }
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN', 'ROLE_COLLABORATOR')")
     public ResponseEntity<String> deleteLike(@RequestBody LikePayload payload) {
         try {
             if (payload.getId_post() != null && payload.getId_user() != null) {
@@ -64,7 +65,7 @@ public class LikeController {
     }
 
     @DeleteMapping("/delete/{id_post}")
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN', 'ROLE_COLLABORATOR')")
     public ResponseEntity<String> deleteAllLikeByPostID(@PathVariable("id_post") Integer id_post) {
         try {
             if (id_post != null) {
@@ -80,18 +81,21 @@ public class LikeController {
         }
     }
 
-    @GetMapping("/isLikeExists")
-    public ResponseEntity<String> isLikeExists(@RequestBody LikePayload payload) {
+    @PostMapping("/isLikeExists")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN', 'ROLE_COLLABORATOR')")
+    public ResponseEntity<LikePayload> isLikeExists(@RequestBody LikePayload payload) {
         try {
             if (payload.getId_post() != null && payload.getId_user() != null) {
-                likeService.handleIsIdExists(payload.getId_post(), payload.getId_user());
-                return ResponseEntity.ok("Like already exixts");
+                if(likeService.handleIsIdExists(payload.getId_post(), payload.getId_user())){
+                    return ResponseEntity.ok().body(payload);
+                }
+                return ResponseEntity.badRequest().body(null);
             } else {
-                return ResponseEntity.badRequest().body("Both id_post and id_user are required");
+                return ResponseEntity.badRequest().body(null);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete like. Please try again later.");
+            return ResponseEntity.internalServerError().body(null);
         }
     }
 }

@@ -274,11 +274,11 @@ public class PostService {
                     .map(postRes -> {
                         PostResponse res = new PostResponse();
                         res.setId_post((Integer) postRes[0]);
-                        res.setDate_time((Date) postRes[1]);
-                        res.setPost_name((String) postRes[2]);
+                        res.setProvince_name((String) postRes[1]);
+                        res.setId_province((Integer) postRes[2]);
                         res.setImage((String) postRes[3]);
-                        res.setProvince_name((String) postRes[4]);
-                        res.setId_province((Integer) postRes[5]);
+                        // res.setDate_time((Date) postRes[1]);
+                        // res.setPost_name((String) postRes[2]);
                         return res;
                     })
                     .collect(Collectors.toList());
