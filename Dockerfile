@@ -18,8 +18,8 @@ WORKDIR /app
 COPY --from=builder /app/target/TravelinVServer-0.0.1-SNAPSHOT.jar /app/TravelinVServer.jar
 
 # Set environment variables
-ENV SPRING_DATASOURCE_URL=jdbc:postgresql://travelinv.postgres.database.azure.com:5432/travelinv
-ENV SPRING_DATASOURCE_USERNAME=admin_azure
+ENV SPRING_DATASOURCE_URL=jdbc:postgresql://travelinv-postgre.postgres.database.azure.com:5432/travelinv-postgre
+ENV SPRING_DATASOURCE_USERNAME=azure_admin
 ENV SPRING_DATASOURCE_PASSWORD=Baitaplonso7
 ENV SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
 ENV SPRING_SECURITY_USERNAME=admin

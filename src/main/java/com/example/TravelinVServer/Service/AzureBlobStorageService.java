@@ -23,9 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class AzureBlobStorageService {
 
-    private static final String storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=travelinvserver;AccountKey=/5e85MPlxMwrES9cH7cY7pqJUCOm+0sz6M8ifjOzSlkhXzHajRFXFKNMBcywVj5g6jFP213fQLVX+AStehBtaA==;EndpointSuffix=core.windows.net";
+    private static final String storageConnectionString = "DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=travelinvstorage;AccountKey=bATIlIXmfgJscgxErvtUvKJN0zMfDOdhAqCIdSFp3CKXgJNSXq2+fqyIZeI5nsq/qNVuktG5C9ez+AStHMTRfg==;BlobEndpoint=https://travelinvstorage.blob.core.windows.net/;FileEndpoint=https://travelinvstorage.file.core.windows.net/;QueueEndpoint=https://travelinvstorage.queue.core.windows.net/;TableEndpoint=https://travelinvstorage.table.core.windows.net/";
 // e.g., "DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=mykey;EndpointSuffix=core.windows.net"
-    private static final String containerName = "travelinvimage"; // Name of the container to store blobs
+    private static final String containerName = "travelinvblobstorage"; // Name of the container to store blobs
 
     public String uploadImage(MultipartFile file) throws Exception {
         try {
